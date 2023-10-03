@@ -182,27 +182,45 @@ namespace matricesfinal
 
         private void btnLlenarMatriz_Click(object sender, EventArgs e)
         {
-            // Definir el tamaño de la matriz aquí
-            int filas = 5; 
-            int columnas = 5; 
-
-            
-            Random random = new Random();
-
-            int[,] matriz = new int[filas, columnas];
-
-            // Entre que numeros los aleatorios
-            for (int i = 0; i < filas; i++)
+            if (int.TryParse(txtTamañoCuadrado.Text, out int tamaño) && tamaño > 0)
             {
-                for (int j = 0; j < columnas; j++)
+                // Definir el tamaño de la matriz cuadrada
+                int filas = tamaño;
+                int columnas = tamaño;
+
+                Random random = new Random();
+
+                int[,] matriz = new int[filas, columnas];
+
+                // Llena la matriz con números aleatorios entre 1 y 9
+                for (int i = 0; i < filas; i++)
                 {
-                    matriz[i, j] = random.Next(1, 9); 
+                    for (int j = 0; j < columnas; j++)
+                    {
+                        matriz[i, j] = random.Next(1, 10);
+                    }
+                }
+
+                // Llama a la función para llenar el DataGridView con la matriz generada aleatoriamente.
+                LlenarDataGridViewConMatriz(matriz);
+
+                // Verifica si la matriz es un cuadrado mágico y muestra un mensaje.
+                if (EsCuadroMagico(matriz))
+                {
+                    MessageBox.Show("Es un cuadro mágico.");
+                }
+                else
+                {
+                    MessageBox.Show("No es un cuadro mágico.");
                 }
             }
-
-            // Llama a la función para llenar el DataGridView con la matriz generada aleatoriamente.
-            LlenarDataGridViewConMatriz(matriz);
+            else
+            {
+                MessageBox.Show("Por favor, ingrese un tamaño válido (entero mayor que 0).");
+            }
         }
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -278,6 +296,11 @@ namespace matricesfinal
         {
             btnLlenarMatriz_Click(sender, e);
             btnCalcularSumas_Click(sender, e);
+        }
+
+        private void txtTamañoCuadrado_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
