@@ -38,8 +38,8 @@ namespace matricesfinal
         private void btnIrAEjercicio4_Click(object sender, EventArgs e)
         {
 
-            Form1 ejercicio1Form = new Form1();
-            ejercicio1Form.Show();
+            Form4 ejercicio4Form = new Form4();
+            ejercicio4Form.Show();
         }
         private void txtTamaño_TextChanged(object sender, EventArgs e)
         {

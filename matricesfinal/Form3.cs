@@ -45,9 +45,8 @@ namespace matricesfinal
             dgvVentas.ColumnCount = columnas + 1;
             for (int j = 0; j < columnas; j++)
             {
-                dgvVentas.Rows[0].Cells[j + 1].Value = $"Día {j + 1}";
+                dgvVentas.Rows[0].Cells[j + 1].Value = diasDeLaSemana[j];
             }
-            string[] meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
             for (int i = 0; i < filas; i++)
             {
                 dgvVentas.Rows[i + 1].Cells[0].Value = meses[i];
