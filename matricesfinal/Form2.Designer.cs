@@ -46,6 +46,7 @@
             this.dgvMatrizPrincipal.Name = "dgvMatrizPrincipal";
             this.dgvMatrizPrincipal.Size = new System.Drawing.Size(429, 150);
             this.dgvMatrizPrincipal.TabIndex = 0;
+            this.dgvMatrizPrincipal.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvMatrizPrincipal_ColumnAdded);
             // 
             // dgvSumaFilas
             // 
@@ -60,7 +61,7 @@
             this.dgvSumaColumnas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSumaColumnas.Location = new System.Drawing.Point(80, 228);
             this.dgvSumaColumnas.Name = "dgvSumaColumnas";
-            this.dgvSumaColumnas.Size = new System.Drawing.Size(429, 75);
+            this.dgvSumaColumnas.Size = new System.Drawing.Size(429, 113);
             this.dgvSumaColumnas.TabIndex = 2;
             // 
             // btnGenerarMatriz
@@ -85,11 +86,12 @@
             // 
             // btnActualizarFilas
             // 
+            this.btnActualizarFilas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActualizarFilas.Location = new System.Drawing.Point(592, 228);
             this.btnActualizarFilas.Name = "btnActualizarFilas";
             this.btnActualizarFilas.Size = new System.Drawing.Size(107, 76);
             this.btnActualizarFilas.TabIndex = 5;
-            this.btnActualizarFilas.Text = "Actualizar";
+            this.btnActualizarFilas.Text = "Suma y Promedio\r\nActualizar";
             this.btnActualizarFilas.UseVisualStyleBackColor = true;
             this.btnActualizarFilas.Click += new System.EventHandler(this.btnActualizarColumnasYFilas_Click);
             // 

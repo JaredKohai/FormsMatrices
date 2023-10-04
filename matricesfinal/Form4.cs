@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,24 +9,27 @@ namespace matricesfinal
     {
         private double[,] calificaciones = new double[,]
         {
-            { 5.5, 8.6, 10 },
-            { 8.0, 5.5, 10 },
-            { 9.0, 4.1, 7.8 },
-            { 10, 2.2, 8.1 },
-            { 7.0, 9.2, 7.1 },
-            { 9.0, 4.0, 6.0 },
-            { 6.5, 5.0, 5.0 },
-            { 4.0, 7.0, 4.0 },
-            { 8.0, 8.0, 9.0 },
-            { 10, 9.0, 9.2 },
-            { 5.0, 10, 8.4 },
-            { 9.0, 4.6, 7.5 }
-        };
+    { 5.5, 8.6, 10 },
+    { 8.0, 5.5, 10 },
+    { 9.0, 4.1, 7.8 },
+    { 10, 2.2, 8.1 },
+    { 7.0, 9.2, 7.1 },
+    { 9.0, 4.0, 6.0 },
+    { 6.5, 5.0, 5.0 },
+    { 4.0, 7.0, 4.0 },
+    { 8.0, 8.0, 9.0 },
+    { 10, 9.0, 9.2 },
+    { 5.0, 10, 8.4 },
+    { 9.0, 4.6, 7.5 },
+     };
 
         public Form4()
         {
             InitializeComponent();
             LlenarDataGridViewConMatriz();
+            dgvCalificaciones.AllowUserToAddRows = true;
+
+            dgvCalificaciones.CellValueChanged += dgvCalificaciones_CellValueChanged;
         }
 
         private void LlenarDataGridViewConMatriz()
@@ -33,29 +37,28 @@ namespace matricesfinal
             int filas = calificaciones.GetLength(0);
             int columnas = calificaciones.GetLength(1);
 
-            dgvCalificaciones.RowCount = filas + 1;
-            dgvCalificaciones.ColumnCount = columnas + 1;
+            dgvCalificaciones.RowCount = filas;
+            dgvCalificaciones.ColumnCount = columnas;
 
-            // Agrega el encabezado de las columnas (Parciales)
             for (int j = 0; j < columnas; j++)
             {
-                dgvCalificaciones.Columns[j + 1].HeaderText = $"Parcial {j + 1}";
+                dgvCalificaciones.Columns[j].HeaderText = $"Parcial {j + 1}";
             }
 
-            // Agrega el encabezado de las filas (Alumnos)
             for (int i = 0; i < filas; i++)
             {
-                dgvCalificaciones.Rows[i + 1].HeaderCell.Value = $"Alumno {i + 1}";
+                dgvCalificaciones.Rows[i].HeaderCell.Value = $"Alumno {i + 1}";
             }
 
             for (int i = 0; i < filas; i++)
             {
                 for (int j = 0; j < columnas; j++)
                 {
-                    dgvCalificaciones.Rows[i + 1].Cells[j + 1].Value = calificaciones[i, j];
+                    dgvCalificaciones.Rows[i].Cells[j].Value = calificaciones[i, j];
                 }
             }
         }
+
 
         private void btnParcialesReprobados_Click(object sender, EventArgs e)
         {
@@ -97,6 +100,7 @@ namespace matricesfinal
             CalcularDistribucionCalificaciones();
         }
 
+
         private double CalcularPromedioMasBajo()
         {
             double promedioMasBajo = calificaciones[0, 0];
@@ -119,14 +123,18 @@ namespace matricesfinal
 
         private double CalcularPromedioMasAlto()
         {
-            double promedioMasAlto = calificaciones[0, 0];
+            double promedioMasAlto = 0.0;
 
             for (int i = 0; i < calificaciones.GetLength(0); i++)
             {
-                double promedioAlumno = calificaciones.Cast<double>()
-                    .Skip(i * calificaciones.GetLength(1))
-                    .Take(calificaciones.GetLength(1))
-                    .Average();
+                double promedioAlumno = 0.0;
+
+                for (int j = 0; j < calificaciones.GetLength(1); j++)
+                {
+                    promedioAlumno += calificaciones[i, j];
+                }
+
+                promedioAlumno /= calificaciones.GetLength(1);
 
                 if (promedioAlumno > promedioMasAlto)
                 {
@@ -136,6 +144,7 @@ namespace matricesfinal
 
             return promedioMasAlto;
         }
+
 
         private void CalcularPromedioAlumnos()
         {
@@ -160,33 +169,40 @@ namespace matricesfinal
         }
         private void CalcularDistribucionCalificaciones()
         {
-            int[] distribucion = new int[6]; // Categorías de calificaciones
+            int[] distribucion = new int[6];
+            HashSet<int> alumnosReprobados = new HashSet<int>();
 
-            foreach (double calificacion in calificaciones)
+            for (int i = 0; i < calificaciones.GetLength(0); i++)
             {
-                if (calificacion >= 0 && calificacion < 5)
+                double promedioAlumno = calificaciones.Cast<double>()
+                    .Skip(i * calificaciones.GetLength(1))
+                    .Take(calificaciones.GetLength(1))
+                    .Average();
+
+                if (promedioAlumno < 5.0)
                 {
-                    distribucion[0]++;
+                    distribucion[0]++; 
+                    alumnosReprobados.Add(i);
                 }
-                else if (calificacion >= 5 && calificacion < 6)
+                else if (promedioAlumno >= 5.0 && promedioAlumno < 6.0)
                 {
-                    distribucion[1]++;
+                    distribucion[1]++; 
                 }
-                else if (calificacion >= 6 && calificacion < 7)
+                else if (promedioAlumno >= 6.0 && promedioAlumno < 7.0)
                 {
-                    distribucion[2]++;
+                    distribucion[2]++; 
                 }
-                else if (calificacion >= 7 && calificacion < 8)
+                else if (promedioAlumno >= 7.0 && promedioAlumno < 8.0)
                 {
-                    distribucion[3]++;
+                    distribucion[3]++; 
                 }
-                else if (calificacion >= 8 && calificacion < 9)
+                else if (promedioAlumno >= 8.0 && promedioAlumno < 9.0)
                 {
-                    distribucion[4]++;
+                    distribucion[4]++; 
                 }
-                else if (calificacion >= 9 && calificacion <= 10)
+                else if (promedioAlumno >= 9.0 && promedioAlumno <= 10.0)
                 {
-                    distribucion[5]++;
+                    distribucion[5]++; 
                 }
             }
 
@@ -198,7 +214,41 @@ namespace matricesfinal
                 resultado += $"{categorias[i]}: {distribucion[i]} Alumnos\n";
             }
 
+            resultado = resultado.Replace($"{categorias[0]}: {distribucion[0]} Alumnos", $"{categorias[0]}: {distribucion[0] - alumnosReprobados.Count} Alumnos");
+
             MessageBox.Show(resultado);
+        }
+
+
+
+        private void dgvCalificaciones_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                double nuevoValor;
+                if (double.TryParse(dgvCalificaciones.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString(), out nuevoValor))
+                {
+                    calificaciones[e.RowIndex, e.ColumnIndex] = nuevoValor;
+                }
+                else
+                {
+                }
+            }
+        }
+
+        private void dgvCalificaciones_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCalificaciones_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            dgvCalificaciones.ReadOnly = false; 
+            dgvCalificaciones.AllowUserToAddRows = false; 
+
+            dgvCalificaciones.AllowUserToOrderColumns = false;
+            dgvCalificaciones.AllowUserToResizeColumns = false;
+            dgvCalificaciones.AllowUserToResizeRows = false;
         }
     }
 }

@@ -34,23 +34,23 @@
             this.dgvMatriz = new System.Windows.Forms.DataGridView();
             this.btnVerificarResultado = new System.Windows.Forms.Button();
             this.lblResultado = new System.Windows.Forms.Label();
-            this.dgvSumas = new System.Windows.Forms.DataGridView();
-            this.btnIrAEjercicio1 = new System.Windows.Forms.Button();
-            this.btnIrAEjercicio2 = new System.Windows.Forms.Button();
-            this.btnIrAEjercicio3 = new System.Windows.Forms.Button();
-            this.btnIrAEjercicio4 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.txtTamañoCuadrado = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.dgvSumaFilas = new System.Windows.Forms.DataGridView();
+            this.dgvSumaColumnas = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatriz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSumas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSumaFilas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSumaColumnas)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(226, 353);
+            this.label1.Location = new System.Drawing.Point(7, 160);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 0;
@@ -59,7 +59,7 @@
             // 
             // txtTamaño
             // 
-            this.txtTamaño.Location = new System.Drawing.Point(294, 350);
+            this.txtTamaño.Location = new System.Drawing.Point(75, 160);
             this.txtTamaño.Name = "txtTamaño";
             this.txtTamaño.Size = new System.Drawing.Size(100, 20);
             this.txtTamaño.TabIndex = 1;
@@ -67,7 +67,7 @@
             // 
             // btnVerificarInicio
             // 
-            this.btnVerificarInicio.Location = new System.Drawing.Point(272, 84);
+            this.btnVerificarInicio.Location = new System.Drawing.Point(121, 68);
             this.btnVerificarInicio.Name = "btnVerificarInicio";
             this.btnVerificarInicio.Size = new System.Drawing.Size(214, 23);
             this.btnVerificarInicio.TabIndex = 2;
@@ -78,15 +78,16 @@
             // dgvMatriz
             // 
             this.dgvMatriz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMatriz.Location = new System.Drawing.Point(47, 113);
+            this.dgvMatriz.Location = new System.Drawing.Point(196, 97);
             this.dgvMatriz.Name = "dgvMatriz";
-            this.dgvMatriz.Size = new System.Drawing.Size(300, 204);
+            this.dgvMatriz.Size = new System.Drawing.Size(323, 204);
             this.dgvMatriz.TabIndex = 3;
             this.dgvMatriz.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatriz_CellContentClick);
+            this.dgvMatriz.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.False);
             // 
             // btnVerificarResultado
             // 
-            this.btnVerificarResultado.Location = new System.Drawing.Point(401, 350);
+            this.btnVerificarResultado.Location = new System.Drawing.Point(40, 186);
             this.btnVerificarResultado.Name = "btnVerificarResultado";
             this.btnVerificarResultado.Size = new System.Drawing.Size(75, 23);
             this.btnVerificarResultado.TabIndex = 4;
@@ -97,86 +98,37 @@
             // lblResultado
             // 
             this.lblResultado.AutoSize = true;
-            this.lblResultado.Location = new System.Drawing.Point(515, 357);
+            this.lblResultado.Location = new System.Drawing.Point(7, 224);
             this.lblResultado.Name = "lblResultado";
-            this.lblResultado.Size = new System.Drawing.Size(31, 13);
+            this.lblResultado.Size = new System.Drawing.Size(0, 13);
             this.lblResultado.TabIndex = 5;
-            this.lblResultado.Text = "____";
             this.lblResultado.Click += new System.EventHandler(this.lblResultado_Click);
-            // 
-            // dgvSumas
-            // 
-            this.dgvSumas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSumas.Location = new System.Drawing.Point(395, 116);
-            this.dgvSumas.Name = "dgvSumas";
-            this.dgvSumas.Size = new System.Drawing.Size(297, 204);
-            this.dgvSumas.TabIndex = 6;
-            this.dgvSumas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSumas_CellContentClick);
-            // 
-            // btnIrAEjercicio1
-            // 
-            this.btnIrAEjercicio1.Location = new System.Drawing.Point(51, 13);
-            this.btnIrAEjercicio1.Name = "btnIrAEjercicio1";
-            this.btnIrAEjercicio1.Size = new System.Drawing.Size(75, 23);
-            this.btnIrAEjercicio1.TabIndex = 8;
-            this.btnIrAEjercicio1.Text = "Ejercicio 1";
-            this.btnIrAEjercicio1.UseVisualStyleBackColor = true;
-            this.btnIrAEjercicio1.Click += new System.EventHandler(this.btnIrAEjercicio1_Click);
-            // 
-            // btnIrAEjercicio2
-            // 
-            this.btnIrAEjercicio2.Location = new System.Drawing.Point(162, 12);
-            this.btnIrAEjercicio2.Name = "btnIrAEjercicio2";
-            this.btnIrAEjercicio2.Size = new System.Drawing.Size(75, 23);
-            this.btnIrAEjercicio2.TabIndex = 9;
-            this.btnIrAEjercicio2.Text = "Ejercicio 2";
-            this.btnIrAEjercicio2.UseVisualStyleBackColor = true;
-            this.btnIrAEjercicio2.Click += new System.EventHandler(this.btnIrAEjercicio2_Click);
-            // 
-            // btnIrAEjercicio3
-            // 
-            this.btnIrAEjercicio3.Location = new System.Drawing.Point(272, 11);
-            this.btnIrAEjercicio3.Name = "btnIrAEjercicio3";
-            this.btnIrAEjercicio3.Size = new System.Drawing.Size(75, 23);
-            this.btnIrAEjercicio3.TabIndex = 10;
-            this.btnIrAEjercicio3.Text = "Ejercicio 3";
-            this.btnIrAEjercicio3.UseVisualStyleBackColor = true;
-            this.btnIrAEjercicio3.Click += new System.EventHandler(this.btnIrAEjercicio3_Click);
-            // 
-            // btnIrAEjercicio4
-            // 
-            this.btnIrAEjercicio4.Location = new System.Drawing.Point(384, 10);
-            this.btnIrAEjercicio4.Name = "btnIrAEjercicio4";
-            this.btnIrAEjercicio4.Size = new System.Drawing.Size(75, 23);
-            this.btnIrAEjercicio4.TabIndex = 11;
-            this.btnIrAEjercicio4.Text = "Ejercicio 4";
-            this.btnIrAEjercicio4.UseVisualStyleBackColor = true;
-            this.btnIrAEjercicio4.Click += new System.EventHandler(this.btnIrAEjercicio4_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(338, 58);
+            this.label2.Location = new System.Drawing.Point(327, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(101, 25);
             this.label2.TabIndex = 12;
             this.label2.Text = "Ejercicio 1";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(616, 84);
+            this.button1.Location = new System.Drawing.Point(561, 355);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(124, 26);
             this.button1.TabIndex = 13;
-            this.button1.Text = "Actualizar";
+            this.button1.Text = "Actualizar sumas";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnCalcularSumas_Click);
             // 
             // txtTamañoCuadrado
             // 
-            this.txtTamañoCuadrado.Location = new System.Drawing.Point(112, 86);
+            this.txtTamañoCuadrado.Location = new System.Drawing.Point(15, 71);
             this.txtTamañoCuadrado.Name = "txtTamañoCuadrado";
             this.txtTamañoCuadrado.Size = new System.Drawing.Size(100, 20);
             this.txtTamañoCuadrado.TabIndex = 14;
@@ -185,26 +137,67 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(104, 69);
+            this.label3.Location = new System.Drawing.Point(9, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(119, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Ingresa las dimensiones";
+            // 
+            // dgvSumaFilas
+            // 
+            this.dgvSumaFilas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSumaFilas.Location = new System.Drawing.Point(535, 97);
+            this.dgvSumaFilas.Name = "dgvSumaFilas";
+            this.dgvSumaFilas.Size = new System.Drawing.Size(116, 204);
+            this.dgvSumaFilas.TabIndex = 16;
+            // 
+            // dgvSumaColumnas
+            // 
+            this.dgvSumaColumnas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSumaColumnas.Location = new System.Drawing.Point(196, 307);
+            this.dgvSumaColumnas.Name = "dgvSumaColumnas";
+            this.dgvSumaColumnas.Size = new System.Drawing.Size(323, 74);
+            this.dgvSumaColumnas.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(532, 307);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(187, 39);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "En caso de modificar datos de la tabla\r\ndebe sumar nuevamente. Presione el\r\nsigui" +
+    "ente boton";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(7, 106);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(183, 39);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Seleccionar al tamaño que\r\nquieras, si quiere volver a calcular\r\nel que tiene, in" +
+    "gresa el tamaño actual";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.dgvSumaColumnas);
+            this.Controls.Add(this.dgvSumaFilas);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTamañoCuadrado);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnIrAEjercicio4);
-            this.Controls.Add(this.btnIrAEjercicio3);
-            this.Controls.Add(this.btnIrAEjercicio2);
-            this.Controls.Add(this.btnIrAEjercicio1);
-            this.Controls.Add(this.dgvSumas);
             this.Controls.Add(this.lblResultado);
             this.Controls.Add(this.btnVerificarResultado);
             this.Controls.Add(this.dgvMatriz);
@@ -214,7 +207,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatriz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSumas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSumaFilas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSumaColumnas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,15 +222,14 @@
         private System.Windows.Forms.DataGridView dgvMatriz;
         private System.Windows.Forms.Button btnVerificarResultado;
         private System.Windows.Forms.Label lblResultado;
-        private System.Windows.Forms.DataGridView dgvSumas;
-        private System.Windows.Forms.Button btnIrAEjercicio1;
-        private System.Windows.Forms.Button btnIrAEjercicio2;
-        private System.Windows.Forms.Button btnIrAEjercicio3;
-        private System.Windows.Forms.Button btnIrAEjercicio4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtTamañoCuadrado;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dgvSumaFilas;
+        private System.Windows.Forms.DataGridView dgvSumaColumnas;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 

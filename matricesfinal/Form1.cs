@@ -17,30 +17,38 @@ namespace matricesfinal
             InitializeComponent();
         }
 
-        private void btnIrAEjercicio1_Click(object sender, EventArgs e)
+        private void dgvMatriz_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-
-            Form1 ejercicio1Form = new Form1();
-            ejercicio1Form.Show();
+            if (!int.TryParse(e.FormattedValue.ToString(), out int valor))
+            {
+                MessageBox.Show("Por favor, ingrese un valor numérico.");
+                e.Cancel = true; 
+            }
+            else
+            {
+                int tamaño = dgvMatriz.RowCount;
+                if (e.RowIndex >= tamaño || e.ColumnIndex >= tamaño)
+                {
+                    MessageBox.Show("No puede ingresar datos fuera de los límites de la tabla.");
+                    e.Cancel = true; 
+                }
+            }
         }
-        private void btnIrAEjercicio2_Click(object sender, EventArgs e)
+
+        private int ObtenerTamañoDesdeTextBox(string valorTextBox)
         {
-
-            Form2 ejercicio2Formjb = new Form2();
-            ejercicio2Formjb.Show();
+            if (int.TryParse(valorTextBox, out int tamaño) && tamaño > 0)
+            {
+                return tamaño;
+            }
+            else
+            {
+                return 3; 
+            }
         }
-        private void btnIrAEjercicio3_Click(object sender, EventArgs e)
-        {
 
-            Form3 ejercicio3Form = new Form3();
-            ejercicio3Form.Show();
-        }
-        private void btnIrAEjercicio4_Click(object sender, EventArgs e)
-        {
 
-            Form4 ejercicio4Form = new Form4();
-            ejercicio4Form.Show();
-        }
+
         private void txtTamaño_TextChanged(object sender, EventArgs e)
         {
 
@@ -48,17 +56,21 @@ namespace matricesfinal
 
         private void btnVerificarResultado_Click(object sender, EventArgs e)
         {
-
             if (int.TryParse(txtTamaño.Text, out int tamaño) && tamaño > 0)
             {
                 int[,] matriz = new int[tamaño, tamaño];
 
-                // Aqui coloco los datos que ingrese en DataGridView.
+                if (dgvMatriz.RowCount < tamaño || dgvMatriz.ColumnCount < tamaño)
+                {
+                    MessageBox.Show("La tabla es de menor tamaño.");
+                    return;
+                }
+
                 for (int i = 0; i < tamaño; i++)
                 {
                     for (int j = 0; j < tamaño; j++)
                     {
-                        if (int.TryParse(dgvMatriz.Rows[i].Cells[j].Value.ToString(), out int valor))
+                        if (int.TryParse(dgvMatriz.Rows[i].Cells[j].Value?.ToString(), out int valor))
                         {
                             matriz[i, j] = valor;
                         }
@@ -70,7 +82,6 @@ namespace matricesfinal
                     }
                 }
 
-                // Checar si el cuadro es magico
                 if (EsCuadroMagico(matriz))
                 {
                     int constanteMagica = CalcularConstanteMagica(matriz);
@@ -89,6 +100,7 @@ namespace matricesfinal
 
 
 
+
         private void dgvMatriz_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -103,7 +115,6 @@ namespace matricesfinal
             int tamaño = matriz.GetLength(0);
             int constanteMagica = CalcularConstanteMagica(matriz);
 
-            // Verificar las sumas de filas y columnas.
             for (int i = 0; i < tamaño; i++)
             {
                 int sumaFila = 0;
@@ -119,7 +130,6 @@ namespace matricesfinal
                 }
             }
 
-            // Verificar la suma de la diagonal principal.
             int sumaDiagonalPrincipal = 0;
             for (int i = 0; i < tamaño; i++)
             {
@@ -130,7 +140,6 @@ namespace matricesfinal
                 return false;
             }
 
-            // Verificar la suma de la diagonal secundaria paa el caso de que sea mayor a 1x1
             if (tamaño > 1)
             {
                 int sumaDiagonalSecundaria = 0;
@@ -153,7 +162,6 @@ namespace matricesfinal
             int tamaño = matriz.GetLength(0);
             int sumaFila = 0;
 
-            // Sumar los valores de la primera fila
             for (int j = 0; j < tamaño; j++)
             {
                 sumaFila += matriz[0, j];
@@ -166,11 +174,9 @@ namespace matricesfinal
             int filas = matriz.GetLength(0);
             int columnas = matriz.GetLength(1);
 
-            // Configura el DataGridView para que coincida con el tamaño de la matriz
             dgvMatriz.RowCount = filas;
             dgvMatriz.ColumnCount = columnas;
 
-            // Llena el DataGridView con los valores de la matriz.
             for (int i = 0; i < filas; i++)
             {
                 for (int j = 0; j < columnas; j++)
@@ -184,7 +190,6 @@ namespace matricesfinal
         {
             if (int.TryParse(txtTamañoCuadrado.Text, out int tamaño) && tamaño > 0)
             {
-                // Definir el tamaño de la matriz cuadrada
                 int filas = tamaño;
                 int columnas = tamaño;
 
@@ -192,7 +197,6 @@ namespace matricesfinal
 
                 int[,] matriz = new int[filas, columnas];
 
-                // Llena la matriz con números aleatorios entre 1 y 9
                 for (int i = 0; i < filas; i++)
                 {
                     for (int j = 0; j < columnas; j++)
@@ -201,13 +205,12 @@ namespace matricesfinal
                     }
                 }
 
-                // Llama a la función para llenar el DataGridView con la matriz generada aleatoriamente.
                 LlenarDataGridViewConMatriz(matriz);
 
-                // Verifica si la matriz es un cuadrado mágico y muestra un mensaje.
                 if (EsCuadroMagico(matriz))
                 {
-                    MessageBox.Show("Es un cuadro mágico.");
+                    int constanteMagica = CalcularConstanteMagica(matriz);
+                    MessageBox.Show($"Es un cuadro mágico. Constante mágica: {constanteMagica}");
                 }
                 else
                 {
@@ -222,66 +225,13 @@ namespace matricesfinal
 
 
 
+
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void CalcularSumas()
-        {
-            int filas = dgvMatriz.RowCount;
-            int columnas = dgvMatriz.ColumnCount;
-
-            int[,] matriz = new int[filas, columnas];
-
-            // Obtén los valores de las celdas del DataGridView y llénalos en la matriz
-            for (int i = 0; i < filas; i++)
-            {
-                for (int j = 0; j < columnas; j++)
-                {
-                    if (int.TryParse(dgvMatriz.Rows[i].Cells[j].Value?.ToString(), out int valor))
-                    {
-                        matriz[i, j] = valor;
-                    }
-                    else
-                    {
-                        matriz[i, j] = 0; // Si no es un número válido, se pone 0 en vez de null
-                    }
-                }
-            }
-
-            // Calcula las sumas de filas y columnas
-            int[] sumasFilas = new int[filas];
-            int[] sumasColumnas = new int[columnas];
-
-            for (int i = 0; i < filas; i++)
-            {
-                for (int j = 0; j < columnas; j++)
-                {
-                    sumasFilas[i] += matriz[i, j];
-                    sumasColumnas[j] += matriz[i, j];
-                }
-            }
-
-            // Crea una nueva tabla de datos para mostrar las sumas.
-            DataTable tablaSumas = new DataTable();
-            tablaSumas.Columns.Add("Suma de Filas");
-            tablaSumas.Columns.Add("Suma de Columnas");
-
-            // Llena la tabla con las sumas.
-            for (int i = 0; i < filas; i++)
-            {
-                tablaSumas.Rows.Add(sumasFilas[i], "");
-            }
-
-            for (int j = 0; j < columnas; j++)
-            {
-                tablaSumas.Rows.Add("", sumasColumnas[j]);
-            }
-
-            // Enlaza la tabla de datos al DataGridView.
-            dgvSumas.DataSource = tablaSumas;
-        }
+        
 
         private void btnCalcularSumas_Click(object sender, EventArgs e)
         {
@@ -301,6 +251,84 @@ namespace matricesfinal
         private void txtTamañoCuadrado_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        private void CalcularSumas()
+        {
+            int filas = dgvMatriz.RowCount;
+            int columnas = dgvMatriz.ColumnCount;
+
+            int[,] matriz = new int[filas, columnas];
+
+            for (int i = 0; i < filas; i++)
+            {
+                for (int j = 0; j < columnas; j++)
+                {
+                    if (int.TryParse(dgvMatriz.Rows[i].Cells[j].Value?.ToString(), out int valor))
+                    {
+                        matriz[i, j] = valor;
+                    }
+                    else
+                    {
+                        matriz[i, j] = 0;
+                    }
+                }
+            }
+
+            int[] sumasFilas = new int[filas];
+            int[] sumasColumnas = new int[columnas];
+
+            for (int i = 0; i < filas; i++)
+            {
+                for (int j = 0; j < columnas; j++)
+                {
+                    sumasFilas[i] += matriz[i, j];
+                    sumasColumnas[j] += matriz[i, j];
+                }
+            }
+
+            DataTable tablaSumasFilas = new DataTable();
+            tablaSumasFilas.Columns.Add("Suma de Filas");
+
+            for (int i = 0; i < filas; i++)
+            {
+                tablaSumasFilas.Rows.Add(sumasFilas[i]);
+            }
+
+            dgvSumaFilas.DataSource = tablaSumasFilas;
+
+            DataTable tablaSumasColumnas = new DataTable();
+
+            for (int j = 0; j < columnas; j++)
+            {
+                tablaSumasColumnas.Columns.Add($"Columna {j + 1}");
+            }
+
+            DataRow fila = tablaSumasColumnas.NewRow();
+            for (int j = 0; j < columnas; j++)
+            {
+                fila[j] = sumasColumnas[j];
+            }
+            tablaSumasColumnas.Rows.Add(fila);
+
+            dgvSumaColumnas.DataSource = tablaSumasColumnas;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void False(object sender, DataGridViewColumnEventArgs e)
+        {
+            dgvMatriz.ReadOnly = false; 
+            dgvMatriz.AllowUserToAddRows = false;
+
+            int tamaño = ObtenerTamañoDesdeTextBox(txtTamañoCuadrado.Text); 
+            dgvMatriz.ColumnCount = tamaño;
+
+            dgvMatriz.AllowUserToOrderColumns = false;
+            dgvMatriz.AllowUserToResizeColumns = false;
+            dgvMatriz.AllowUserToResizeRows = false;
         }
     }
 }

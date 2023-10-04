@@ -40,11 +40,13 @@
             // dgvCalificaciones
             // 
             this.dgvCalificaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCalificaciones.Location = new System.Drawing.Point(122, 12);
+            this.dgvCalificaciones.Location = new System.Drawing.Point(129, 5);
             this.dgvCalificaciones.Name = "dgvCalificaciones";
-            this.dgvCalificaciones.Size = new System.Drawing.Size(514, 273);
+            this.dgvCalificaciones.Size = new System.Drawing.Size(514, 282);
             this.dgvCalificaciones.TabIndex = 0;
             this.dgvCalificaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCalificaciones_CellContentClick);
+            this.dgvCalificaciones.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvCalificaciones_ColumnAdded);
+            this.dgvCalificaciones.Click += new System.EventHandler(this.dgvCalificaciones_Click);
             // 
             // btnPromedioAlumnos
             // 

@@ -153,5 +153,34 @@ namespace matricesfinal
 
             MessageBox.Show(mensaje);
         }
+        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            int filas = ventas.GetLength(0);
+            int columnas = ventas.GetLength(1);
+
+            for (int i = 0; i < filas; i++)
+            {
+                for (int j = 0; j < columnas; j++)
+                {
+                    if (int.TryParse(dgvVentas.Rows[i + 1].Cells[j + 1].Value?.ToString(), out int nuevoValor))
+                    {
+                        ventas[i, j] = nuevoValor;
+                    }
+                }
+            }
+
+            MessageBox.Show("Cambios guardados correctamente.");
+        }
+
+        private void NoGrid(object sender, DataGridViewColumnEventArgs e)
+        {
+            dgvVentas.ReadOnly = false; 
+            dgvVentas.AllowUserToAddRows = false; 
+
+
+            dgvVentas.AllowUserToOrderColumns = false;
+            dgvVentas.AllowUserToResizeColumns = false;
+            dgvVentas.AllowUserToResizeRows = false;
+        }
     }
 }

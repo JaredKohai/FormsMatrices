@@ -34,6 +34,8 @@
             this.btnVentaTotal = new System.Windows.Forms.Button();
             this.btnVentaPorDia = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnGuardarCambios = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,6 +47,7 @@
             this.dgvVentas.Size = new System.Drawing.Size(620, 366);
             this.dgvVentas.TabIndex = 0;
             this.dgvVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellContentClick);
+            this.dgvVentas.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.NoGrid);
             // 
             // btnMenorVenta
             // 
@@ -95,11 +98,33 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Ventas - Ejercicio 3";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(722, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 39);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Para guardar\r\ncambios\r\npresiones aquí:";
+            // 
+            // btnGuardarCambios
+            // 
+            this.btnGuardarCambios.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnGuardarCambios.Location = new System.Drawing.Point(722, 142);
+            this.btnGuardarCambios.Name = "btnGuardarCambios";
+            this.btnGuardarCambios.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarCambios.TabIndex = 7;
+            this.btnGuardarCambios.Text = "Guardar";
+            this.btnGuardarCambios.UseVisualStyleBackColor = true;
+            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnGuardarCambios);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnVentaPorDia);
             this.Controls.Add(this.btnVentaTotal);
@@ -122,5 +147,7 @@
         private System.Windows.Forms.Button btnVentaTotal;
         private System.Windows.Forms.Button btnVentaPorDia;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnGuardarCambios;
     }
 }
