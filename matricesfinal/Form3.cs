@@ -24,7 +24,7 @@ namespace matricesfinal
 
         private string[] meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
         private string[] diasDeLaSemana = { "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" };
-
+        //o
         public Form3()
         {
             InitializeComponent();
